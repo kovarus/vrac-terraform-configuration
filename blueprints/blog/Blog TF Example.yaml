@@ -1,0 +1,39 @@
+inputs:
+  region:
+    type: string
+    default: us-east-2
+  image_id:
+    type: string
+    default: ami-02ccb28830b645a41
+  flavor:
+    type: string
+    default: t2.micro
+  ec2_instance_port:
+    type: number
+    default: '80'
+  alb_certificate_arn:
+    type: string
+    default: changeMe
+  ssh_key_name:
+    type: string
+    default: changeMe
+resources:
+  terraform:
+    type: Cloud.Terraform.Configuration
+    properties:
+      variables:
+        region: ${input.region}
+        image_id: ${input.image_id}
+        flavor: ${input.flavor}
+        ec2_instance_port: ${input.ec2_instance_port}
+        alb_certificate_arn: ${input.alb_certificate_arn}
+        ssh_key_name: ${input.ssh_key_name}
+      providers:
+      - name: aws
+        # List of available cloud zones: Resident US-EAST-2/us-east-2
+        cloudZone: Resident US-EAST-2/us-east-2
+      terraformVersion: 0.12.26
+      configurationSource:
+        repositoryId: 7fbe8b49-2205-40ab-a5f5-561f774b9888
+        commitId: 0d671b270079573244a27486dfbb9ab81e30545c
+        sourceDirectory: /blog
